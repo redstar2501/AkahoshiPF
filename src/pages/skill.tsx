@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 type Skill = {
   name: string;
@@ -13,111 +14,110 @@ const skills: Skill[] = [
     name: "HTML",
     category: "Front-end",
     description:
-      "HTMLは、ウェブサイトの基盤を構成するマークアップ言語です。適切なセマンティックHTMLを意識し、SEOやアクセシビリティに配慮したコーディングを心掛けています。",
-    icon: "/src/assets/images/html.svg",
+      "HTMLはウェブサイトの基盤を構成するマークアップ言語です。適切なセマンティックHTMLを意識し、SEOやアクセシビリティに配慮したコーディングを心掛けています。",
+    icon: "/images/html.svg",
   },
   {
     name: "CSS",
     category: "Front-end",
     description:
-      "CSSを使用して、レスポンシブデザインやアニメーションを実装し、ユーザーエクスペリエンスを向上させるスタイリングを提供します。SCSSやCSSモジュールの活用も得意です。",
-    icon: "/src/assets/images/css.svg",
+      "CSSを使用してレスポンシブデザインやアニメーションを実装し、ユーザーエクスペリエンスを向上させるスタイリングを提供します。SCSSやCSSモジュールの活用も得意です。",
+    icon: "/images/css.svg",
   },
   {
     name: "SCSS",
     category: "Front-end",
     description:
-      "Sassを活用して、効率的なスタイリングを行い、メンテナンス性の高いCSS設計を実現します。変数、ミックスイン、ネストを適切に活用しています。",
-    icon: "/src/assets/images/sass.svg",
+      "SCSSを活用し、効率的なスタイリングを行い、メンテナンス性の高いCSS設計を実現します。変数、ミックスイン、ネストを適切に活用しています。",
+    icon: "/images/sass.svg",
   },
   {
     name: "Tailwind CSS",
     category: "Front-end",
     description:
-      "Tailwind CSSを使用して、効率的なスタイリングを行い、メンテナンス性の高いCSS設計を実現します。コンポーネント志向のスタイリングを実現し、スピーディーな開発を実現します。",
-    icon: "/src/assets/images/tailwindcss.svg",
+      "Tailwind CSSを使用して、効率的なスタイリングとコンポーネント志向のデザインを実現し、スピーディーな開発を可能にします。",
+    icon: "/images/tailwindcss.svg",
   },
   {
     name: "TypeScript",
     category: "Development",
     description:
       "型安全性を確保し、コードの可読性と保守性を向上させるため、TypeScriptを積極的に活用しています。",
-    icon: "/src/assets/images/ts.svg",
+    icon: "/images/ts.svg",
   },
   {
     name: "GitHub",
     category: "Development",
     description:
-      "GitHubを使用して、コードのバージョン管理やチーム開発を効率化します。プルリクエストやブランチ戦略を活用し、スムーズな共同作業を実施します。",
-    icon: "/src/assets/images/github-mark.svg",
+      "GitHubを使用してコードのバージョン管理やチーム開発を効率化します。プルリクエストやブランチ戦略を活用し、スムーズな共同作業を実施します。",
+    icon: "/images/github-mark.svg",
   },
   {
     name: "PHP",
     category: "CMS",
-    description:
-      "WordPressの運用・保守を行う際に必要になる最低限の知識を有しております。",
-    icon: "/src/assets/images/php.svg",
+    description: "WordPressの運用・保守に必要な基礎的な知識を有しています。",
+    icon: "/images/php.svg",
   },
   {
     name: "JavaScript",
     category: "Development",
     description:
-      "JavaScriptを用いて、DOM操作やアニメーションの実装が出来ます。ES6以降の構文を積極的に活用し、コードの可読性と保守性を向上させます。",
-    icon: "/src/assets/images/javascript.svg",
+      "JavaScriptを用いてDOM操作やアニメーションを実装できます。ES6以降の構文を積極的に活用し、コードの可読性と保守性を向上させます。",
+    icon: "/images/javascript.svg",
   },
   {
     name: "React",
     category: "Frameworks",
     description:
-      "ポートフォリオ作成時のフレームワークとして使用、Reactを使用して、コンポーネントベースのモダンなフロントエンド開発を行います。React Hooksを用いて、状態管理を実現します。",
-    icon: "/src/assets/images/react.svg",
+      "Reactを使用してコンポーネントベースのモダンなフロントエンド開発を行います。React Hooksを活用し、状態管理を適切に行います。",
+    icon: "/images/react.svg",
   },
   {
     name: "Node.js",
     category: "Development",
     description:
-      "Node.js プロジェクトの開発環境構築において、ESLint や Prettier の導入・設定を行い、コード品質の維持とフォーマットの統一を実現しています。pnpm を用いた依存関係の管理を行い、効率的なパッケージインストール・更新にも対応しています。",
-    icon: "/src/assets/images/node.svg",
+      "Node.jsを使用したプロジェクトの開発環境構築を行い、ESLintやPrettierを導入・設定してコード品質を維持しています。pnpmを活用し、依存関係の管理を効率化しています。",
+    icon: "/images/node.svg",
   },
   {
     name: "Vite",
     category: "Build Tools",
     description:
-      "ポートフォリオ作成時のフロントエンド開発用のサーバーとして使用、Viteを用いた高速な開発環境を構築し、最新のフロントエンド技術をスムーズに導入しています。軽量かつ効率的なビルドプロセスを実現します。",
-    icon: "/src/assets/images/vite.svg",
+      "Viteを用いて高速な開発環境を構築し、最新のフロントエンド技術をスムーズに導入しています。軽量かつ効率的なビルドプロセスを実現します。",
+    icon: "/images/vite.svg",
   },
   {
     name: "Photoshop",
     category: "Design Tools",
     description:
-      "photoshopを使用してのチラシ作成やバナー作成、photoshopを使用したデザインカンプをもとにしたコーディングも可能。",
-    icon: "/src/assets/images/photoshop.svg",
+      "Photoshopを使用してチラシやバナーを作成し、デザインカンプをもとにしたコーディングも行うことができます。",
+    icon: "/images/photoshop.svg",
   },
   {
-    name: "illustrator",
+    name: "Illustrator",
     category: "Design Tools",
     description:
-      "illustratorを使用してのチラシ作成やバナー作成、WEBサイトのサムネイルの作成を行ってきました。",
-    icon: "/src/assets/images/illustrator.svg",
+      "Illustratorを使用してチラシやバナーを作成し、WEBサイトのサムネイルデザインなども手掛けてきました。",
+    icon: "/images/illustrator.svg",
   },
   {
     name: "XD",
     category: "Design Tools",
     description:
-      "ワイヤーフレームやカンプの作成も行って来たので、デザイナーの方からXDデータを頂いた場合でも、問題なくデザインをコーディングすることができます。",
-    icon: "/src/assets/images/xd.svg",
+      "ワイヤーフレームやカンプの作成経験があり、デザイナーからXDデータを受け取ってコーディングを行うことができます。",
+    icon: "/images/xd.svg",
   },
   {
     name: "Figma",
     category: "Design Tools",
     description:
-      "Figmaを使用して、ワイヤーフレームやカンプの作成も行って来たので、デザイナーの方からデータを頂いた場合でも、問題なくデザインをコーディングすることができます。",
-    icon: "/src/assets/images/figma.svg",
+      "Figmaを使用してワイヤーフレームやカンプを作成した経験があり、デザイナーからデータを受け取ってコーディングすることが可能です。",
+    icon: "/images/figma.svg",
   },
 ];
-
 const SkillList: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const categories = ["ALL", ...new Set(skills.map((skill) => skill.category))];
 
@@ -139,52 +139,57 @@ const SkillList: React.FC = () => {
   };
 
   return (
-    <article className="">
-      <div className="w-full h-30 sm:h-80 md:h-80 text-left bg-red-400 flex justify-center items-center">
-        <h1 className="text-xs sm:text-lg md:text-2xl font-bold mb-4 text-white">
+    <article className="bg-gray-100">
+      <div className="w-full h-30 sm:h-80 text-left bg-red-400 flex justify-center items-center">
+        <h1 className="text-xs sm:text-lg md:text-2xl font-bold text-white">
           Skills
         </h1>
       </div>
-      <div className="w-5/6 m-auto pt-[8rem] pb-[8rem]">
-        <h1 className="text-xs sm:text-2xl font-bold mb-8 text-left">
-          Skill LIST
+      <div className="w-5/6 m-auto pt-32 pb-32">
+        <h1 className="text-xs sm:text-2xl font-bold mb-8 px-4 py-2 bg-red-400 text-white rounded-tl-lg rounded-tr-lg rounded-bl-lg w-fit">
+          Skill List
         </h1>
-        <div className="grid grid-cols-4 gap-4 mb-32">
+        <div className="flex flex-wrap gap-4 mb-8">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded border-solid border bg-white border-black ${
+              className={`relative overflow-hidden px-4 py-2 rounded border border-white transition-colors duration-300 group ${
                 selectedCategory === category
-                  ? "bg-blue-500 border border-black text-black"
-                  : "bg-gray-200 border border-black text-black"
+                  ? "bg-red-400 text-white"
+                  : "bg-white text-black"
               }`}
             >
-              {category}
+              <span className="relative z-10 group-hover:text-white">
+                {category}
+              </span>
+              <span className="absolute inset-0 scale-x-0 origin-left bg-red-400 transition-transform duration-300 ease-[cubic-bezier(0.45,0,0.55,1)] group-hover:scale-x-100"></span>
             </button>
           ))}
         </div>
-        <ul className="grid col-auto sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <ul
+          ref={ref}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {filteredSkills.map((skill, index) => (
             <motion.li
               key={skill.name}
-              className="rounded shadow-sm bg-white"
+              className="rounded shadow-sm bg-white p-4 border border-gray-200 hover:shadow-lg transition-shadow"
               variants={listVariants}
               initial="hidden"
-              animate="visible"
-              custom={index} // Pass the index to the variants
+              animate={inView ? "visible" : "hidden"}
+              custom={index}
             >
-              <div className="flex items-center border-b-1 px-3 pt-2 pb-1">
+              <div className="flex items-center border-b px-3 pb-2">
                 <img
                   src={skill.icon}
                   alt={skill.name}
                   className="w-6 h-6 mr-2"
                 />
-                <h2 className="font-bold">{skill.name}</h2>
+                <h2 className="font-bold text-black">{skill.name}</h2>
               </div>
-              <p className="text-sm text-left p-3 text-gray-600">
-                {skill.description}
-              </p>
+              <p className="text-sm text-gray-600 mt-2">{skill.description}</p>
             </motion.li>
           ))}
         </ul>

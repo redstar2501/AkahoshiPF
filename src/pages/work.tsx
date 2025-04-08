@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Work: React.FC = () => {
   const workExperience = [
@@ -12,7 +13,7 @@ const Work: React.FC = () => {
       skills: [
         "HTML",
         "CSS",
-        "SASS",
+        "SCSS",
         "JavaScript",
         "PHP",
         "WordPress",
@@ -21,7 +22,7 @@ const Work: React.FC = () => {
       ],
     },
     {
-      title: "コーダー・ウェブデザイナー",
+      title: "マークアップエンジニア・ウェブデザイナー",
       company: "株式会社ウェブライフ",
       duration: "2022年1月 - 2024年4月",
       description:
@@ -48,7 +49,7 @@ const Work: React.FC = () => {
       skills: [
         "HTML",
         "CSS",
-        "SASS",
+        "SCSS",
         "JavaScript",
         "PHP",
         "WordPress",
@@ -83,7 +84,9 @@ const Work: React.FC = () => {
         </h1>
       </div>
       <div className="min-h-screen p-8 w-5/6 m-auto pt-[8rem]  pb-[8rem]">
-        <h1 className="text-3xl font-bold text-left mb-8">業務経歴</h1>
+        <h1 className="text-3xl font-bold text-left mb-8  px-4 py-2 bg-red-400 text-white break-normal w-fit rounded-tl-[0.8rem] rounded-tr-[0.8rem] rounded-br-none rounded-bl-[0.8rem]">
+          Works
+        </h1>
         <motion.div
           className="grid justify-self-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           variants={containerVariants}
@@ -106,15 +109,11 @@ const Work: React.FC = () => {
               <p className="mt-4 text-left text-gray-700 justify-self-start">
                 {work.description}
               </p>
-              <ul
-                className="grid  grid-cols-2  sm:grid-cols-2 lg:grid-cols-4 gap-2 mt-4 text-xs
- text-gray-700"
-              >
+              <ul className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-4 text-xs text-gray-700 break-words">
                 {work.skills.map((skill, skillIndex) => (
                   <li
                     key={skillIndex}
-                    className="list-inside p-1 bg-gray-200 rounded font-medium
-"
+                    className="grid items-center list-inside p-1 bg-gray-200 rounded font-medium break-words"
                   >
                     {skill}
                   </li>
@@ -123,6 +122,14 @@ const Work: React.FC = () => {
             </motion.div>
           ))}
         </motion.div>
+        <div className="mt-12 text-center">
+          <Link
+            to="/achievements"
+            className="inline-block bg-red-400 text-white font-semibold px-6 py-2 rounded hover:bg-red-500 transition"
+          >
+            実績一覧を見る
+          </Link>
+        </div>
       </div>
     </article>
   );
