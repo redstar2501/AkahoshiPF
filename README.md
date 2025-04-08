@@ -45,6 +45,6 @@ my-portfolio/ ├── public/ # 静的ファイル（画像、アイコンな�
 
 ---
 
-## 🌐 公開ページ
+## 公開ページ
 
-👉 [ポートフォリオサイト](https://www.dev-portfolio.site/)
+ [ポートフォリオサイト](https://www.dev-portfolio.site/)
