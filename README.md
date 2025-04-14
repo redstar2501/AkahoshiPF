@@ -13,10 +13,6 @@
 -  **ESLint**: JavaScriptおよびTypeScriptのコード品質を維持するための静的コード解析ツール
 -  **Prettier**: コードの整形ツールで、一貫したコードスタイルを自動で適用
 
-##  ディレクトリ構成
-
-my-portfolio/ ├── public/ # 静的ファイル（画像、アイコンなど） │ └── vite.svg # Viteのロゴ │ ├── src/ # ソースコード │ ├── assets/ # 画像・アイコンなどのリソース │ │ └── images/ # 画像ファイル │ │ ├── cow.svg │ │ ├── css.svg │ │ ├── github-mark.svg │ │ ├── react.svg │ │ └── tailwindcss.svg │ ├── components/ # 再利用可能なコンポーネント │ │ ├── footer.tsx # フッターコンポーネント │ │ ├── header.tsx # ヘッダーコンポーネント │ │ └── waveliene.tsx # ウェーブラインコンポーネント │ ├── pages/ # 各ページのコンポーネント │ │ ├── achievements.tsx # 実績ページ │ │ ├── contact.tsx # お問い合わせページ │ │ ├── home.tsx # ホームページ │ │ ├── skill.tsx # スキルページ │ │ └── work.tsx # 作品ページ │ ├── App.tsx # アプリケーションのエントリーポイント │ ├── main.tsx # メインのエントリーポイント │ ├── index.css # グローバルスタイル │ └── vite-env.d.ts # Viteの型定義ファイル │ ├── .gitignore # Gitの無視設定 ├── README.md # プロジェクトの説明ファイル ├── tailwind.config.ts # Tailwind CSSの設定ファイル ├── tsconfig.json # TypeScriptの設定ファイル └── vite.config.ts # Viteの設定ファイル
-
 ---
 
 ### 説明：
