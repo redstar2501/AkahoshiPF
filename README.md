@@ -43,4 +43,4 @@
 
 ## 公開ページ
 
- [ポートフォリオサイト](https://www.dev-portfolio.site/)
+ [ポートフォリオサイト](https://akahoshi-pf.lomo.jp/)
